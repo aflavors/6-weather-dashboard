@@ -64,6 +64,7 @@ $(document).on("click", ".location-button", function(){
     }).then(function(response){
         console.log(response);
         var locationName = $("<h1>");
+        var iconImg = $("<img>");
         var currentDate = $("<p>");
         var temperature = $("<p>");
         var uvIndex = $("<p>");
@@ -72,6 +73,8 @@ $(document).on("click", ".location-button", function(){
         //Add 5 day forecast
         $(locationName).text(response.name);
         $("#location-weather-view").append(locationName);
+        $(iconImg).attr("src","http://openweathermap.org/img/wn/" + response.weather[0].icon + "@2x.png");
+        $("#location-weather-view").append(iconImg);
         $(currentDate).text(currentDayAndTime); //Figure out Local Time
         $("#location-weather-view").append(currentDate);
         $(temperature).text("Temperature (F): " + tempF.toFixed(2));
