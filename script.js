@@ -94,6 +94,16 @@ $(document).on("click", ".location-button", function(){
             console.log(response.current.uvi) // UV Index
             $(uvIndex).text("UV Index: " + response.current.uvi)
             $("#location-weather-view").append(uvIndex);
+            // UV Index Scale Style
+            if(response.current.uvi <= 3){
+                $(uvIndex).addClass("btn-success");
+            }
+            if(response.current.uvi > 3 && response.current.uvi < 5){
+                $(uvIndex).addClass("btn btn-warning");
+            }
+            else if(response.current.uvi > 5){
+                $(uvIndex).addClass("btn btn-danger");
+            }
         });
     })
 })
