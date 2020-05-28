@@ -53,12 +53,14 @@ $(document).on("click", ".location-button", function(){
         var currentDate = $("<p>");
         var temperature = $("<p>");
         var uvIndex = $("<p>");
+        // Convert temperature to Farenheit
+        var tempF = (response.main.temp - 273.15) * 1.80 + 32;
         //Add 5 day forecast
         $(locationName).text(response.name);
         $("#location-weather-view").append(locationName);
-        $(currentDate).text(currentDayAndTime);
+        $(currentDate).text(currentDayAndTime); //Figure out Local Time
         $("#location-weather-view").append(currentDate);
-        $(temperature).text(response.main.temp);
+        $(temperature).text("Temperature (F): " + tempF.toFixed(2));
         $("#location-weather-view").append(temperature);
         $(uvIndex).text("TBD") //Figure out UV Index Value
         $("#location-weather-view").append(uvIndex);
