@@ -4,12 +4,3 @@
 .form-control {
     border-radius: 0;
 }
-.favorable {
-    background-color: green;
-}
-.moderate {
-    background-color: gold;
-}
-.severe {
-    background-color: firebrick;
-}
