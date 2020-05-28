@@ -1,7 +1,7 @@
 // Initial array of locations
 var locations = ["Charlotte,NorthCarolina", "Bujumbura,Burundi"];
 var APIKey = "5ac6ffcaa85c9e2fcacb6fac2c601688";
-var currentDayAndTime = moment().format('LLLL');
+var currentDay = moment().format('LL');
 // URL we need to query the database
 var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + location + "&appid=" + APIKey;
 
@@ -75,7 +75,7 @@ $(document).on("click", ".location-button", function(){
         $("#location-weather-view").append(locationName);
         $(iconImg).attr("src","http://openweathermap.org/img/wn/" + response.weather[0].icon + "@2x.png");
         $("#location-weather-view").append(iconImg);
-        $(currentDate).text(currentDayAndTime); //Figure out Local Time
+        $(currentDate).text(currentDay); //Figure out Local Time
         $("#location-weather-view").append(currentDate);
         $(temperature).text("Temperature (F): " + tempF.toFixed(2));
         $("#location-weather-view").append(temperature);
