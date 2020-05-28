@@ -58,7 +58,7 @@ $(document).on("click", ".location-button", function(){
     $("#location-weather-view").empty();
     var locationInputText = $(this).text();
     var locationQueryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + locationInputText + "&appid=" + APIKey;
-    $.ajax({
+    $.ajax({ // Current Weather API
         url: locationQueryURL,
         method: "GET"
     }).then(function(response){
@@ -79,7 +79,21 @@ $(document).on("click", ".location-button", function(){
         $("#location-weather-view").append(currentDate);
         $(temperature).text("Temperature (F): " + tempF.toFixed(2));
         $("#location-weather-view").append(temperature);
-        $(uvIndex).text("TBD") //Figure out UV Index Value
-        $("#location-weather-view").append(uvIndex);
+        
+
+        let lat = response.coord.lat;
+        let lon = response.coord.lon;
+
+        // One Call API for UVI + 5-Day
+        var locationQueryOneCall = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey;
+
+        $.ajax({
+            url: locationQueryOneCall,
+            method: "GET"
+        }).then(function(response) {
+            console.log(response.current.uvi) // UV Index
+            $(uvIndex).text("UV Index: " + response.current.uvi)
+            $("#location-weather-view").append(uvIndex);
+        });
     })
 })
