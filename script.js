@@ -5,14 +5,28 @@ var currentDayAndTime = moment().format('LLLL');
 // URL we need to query the database
 var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + location + "&appid=" + APIKey;
 
-var cltQueryURL = "https://api.openweathermap.org/data/2.5/weather?q=Charlotte,NorthCarolina&appid=" + APIKey;
+var cltQueryURL = "https://api.openweathermap.org/data/2.5/forecast?q=Charlotte,NorthCarolina&appid=" + APIKey;
+
 // Test AJAX Call
 $.ajax({
   url: cltQueryURL,
   method: "GET"
 }).then(function(response) {
     console.log(response);
-    console.log(response.name)
+    let lat = response.city.coord.lat;
+    let lon = response.city.coord.lon;
+
+    // Test Additional One Call with Response Lat/Lon
+    var cltQueryURLOneCall = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey;
+
+    $.ajax({
+        url: cltQueryURLOneCall,
+        method: "GET"
+      }).then(function(response) {
+          console.log(response);
+          console.log(response.current.uvi) // UV Index
+          console.log(response.daily);
+      });
 });
 //Test display locations
 function renderLocationButtons() {
