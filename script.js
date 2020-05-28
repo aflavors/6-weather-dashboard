@@ -34,10 +34,7 @@ function renderLocationButtons() {
     locations.forEach(function(location){
         var newLocationButton = $("<button>");
         newLocationButton.text(location);
-        newLocationButton.addClass("location-button");
-        newLocationButton.addClass("btn btn-block");
-        newLocationButton.addClass("btn-outline-secondary");
-        newLocationButton.addClass("btn-group-vertical");
+        newLocationButton.addClass("location-button btn btn-block btn-outline-secondary btn-group-vertical");
         $("#search-location-button-list").append(newLocationButton);
     })
 }
