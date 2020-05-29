@@ -64,6 +64,8 @@ $(document).on("click", ".location-button", function(){
         var iconImg = $("<img>");
         var currentDate = $("<p>");
         var temperature = $("<p>");
+        var humidity = $("<p>");
+        var windSpeed = $("<p>");
         var uvIndex = $("<p>");
         // Convert temperature to Farenheit
         var tempF = (response.main.temp - 273.15) * 1.80 + 32;
@@ -76,6 +78,10 @@ $(document).on("click", ".location-button", function(){
         $("#location-weather-view").append(currentDate);
         $(temperature).text("Temperature (F): " + tempF.toFixed(2));
         $("#location-weather-view").append(temperature);
+        $(humidity).text("Humidity: " + response.main.humidity + "%");
+        $("#location-weather-view").append(humidity);
+        $(windSpeed).text("Wind Speed: " + response.wind.speed + " MPH");
+        $("#location-weather-view").append(windSpeed);
         
 
         let lat = response.coord.lat;
