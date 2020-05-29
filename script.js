@@ -2,35 +2,8 @@
 var locations = ["Charlotte,NorthCarolina", "Bujumbura,Burundi"];
 var APIKey = "5ac6ffcaa85c9e2fcacb6fac2c601688";
 var currentDay = moment().format('LL');
-// URL we need to query the database
-var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + location + "&appid=" + APIKey;
 
-console.log(moment().add(1,'days').format('LL'))
-
-var cltQueryURL = "https://api.openweathermap.org/data/2.5/forecast?q=Charlotte,NorthCarolina&appid=" + APIKey;
-
-// Test AJAX Call
-$.ajax({
-  url: cltQueryURL,
-  method: "GET"
-}).then(function(response) {
-    console.log(response);
-    let lat = response.city.coord.lat;
-    let lon = response.city.coord.lon;
-
-    // Test Additional One Call with Response Lat/Lon
-    var cltQueryURLOneCall = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&appid=" + APIKey;
-
-    $.ajax({
-        url: cltQueryURLOneCall,
-        method: "GET"
-      }).then(function(response) {
-          console.log(response);
-          console.log(response.current.uvi) // UV Index
-          console.log(response.daily);
-      });
-});
-//Test display locations
+//Display Searched Locations
 function renderLocationButtons() {
     $("#search-location-button-list").empty();
     locations.forEach(function(location){
@@ -47,7 +20,6 @@ $("#search-location-button").on("click", function(event){
     event.preventDefault();
     var locationInput = $("#search-location-input").val().trim();
     locations.push(locationInput);
-    console.log(locations);
 // Render Updated List of Locations
     renderLocationButtons();
 })
@@ -64,7 +36,6 @@ $(document).on("click", ".location-button", function(){
         url: locationQueryURL,
         method: "GET"
     }).then(function(response){
-        console.log(response);
         var locationName = $("<h1>");
         var iconImg = $("<img>");
         var currentDate = $("<p>");
@@ -88,7 +59,6 @@ $(document).on("click", ".location-button", function(){
         $(windSpeed).text("Wind Speed: " + response.wind.speed + " MPH");
         $("#location-weather-view").append(windSpeed);
         
-
         let lat = response.coord.lat;
         let lon = response.coord.lon;
 
@@ -114,16 +84,12 @@ $(document).on("click", ".location-button", function(){
             }
 
             let forecastDates = [moment().add(1,'days').format('LL'), moment().add(2,'days').format('LL'), moment().add(3,'days').format('LL'), moment().add(4,'days').format('LL'), moment().add(5,'days').format('LL')];
-            console.log(forecastDates);
 
             let forecastIcons = [response.daily[1].weather[0].icon, response.daily[2].weather[0].icon, response.daily[3].weather[0].icon, response.daily[4].weather[0].icon, response.daily[5].weather[0].icon];
-            console.log(forecastIcons);
 
             let forecastTemps = [response.daily[1].temp.day, response.daily[2].temp.day, response.daily[3].temp.day, response.daily[4].temp.day, response.daily[5].temp.day];
-            console.log(forecastTemps);
 
             let forecastHumidityPercents = [response.daily[1].humidity, response.daily[2].humidity, response.daily[3].humidity, response.daily[4].humidity, response.daily[5].humidity];
-            console.log(forecastHumidityPercents);
 
             for(let i=0; i < 5; i++){
                 
@@ -153,8 +119,3 @@ $(document).on("click", ".location-button", function(){
         });
     })
 })
-
-//Forecast Function
-function renderForecastCard (){
-
-}
