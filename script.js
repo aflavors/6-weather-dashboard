@@ -55,6 +55,8 @@ $("#search-location-button").on("click", function(event){
 //Display Location Information
 $(document).on("click", ".location-button", function(){
     $("#location-weather-view").empty();
+    $("#location-forecast-view").empty();
+    
     var locationInputText = $(this).text();
     var locationQueryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + locationInputText + "&appid=" + APIKey;
     $.ajax({ // Current Weather API
@@ -122,17 +124,30 @@ $(document).on("click", ".location-button", function(){
             let forecastHumidityPercents = [response.daily[1].humidity, response.daily[2].humidity, response.daily[3].humidity, response.daily[4].humidity, response.daily[5].humidity];
             console.log(forecastHumidityPercents);
 
-            for(var i=0; i < 5; i++){
-                console.log(forecastDates[i] + forecastTemps[i])
-                var newForecastCard = $("<div>");
+            for(let i=0; i < 5; i++){
+                
+                let newForecastCard = $("<div>");
                 newForecastCard.addClass("card card-body col-lg-2");
                 newForecastCard.attr("style", "width:12rem;");
                 $("#location-forecast-view").append(newForecastCard);
                 
-                var forecastIcon = $("<img>");
+                let forecastDate = $("<p>");
+                forecastDate.text(forecastDates[i]);
+                $(newForecastCard).append(forecastDate);
+
+                let forecastIcon = $("<img>");
                 forecastIcon.addClass("card-img-top");
                 forecastIcon.attr("src", "http://openweathermap.org/img/wn/" + forecastIcons[i] + "@2x.png");
                 $(newForecastCard).append(forecastIcon);
+
+                let forecastTemp = $("<p>");
+                let forecastTempF = (forecastTemps[i] - 273.15) * 1.80 + 32;
+                forecastTemp.text("Temperature (F): " + forecastTempF.toFixed(2));
+                $(newForecastCard).append(forecastTemp);
+
+                let forecastHumidityPercent = $("<p>");
+                forecastHumidityPercent.text("Humidity: " + forecastHumidityPercents[i] + "%");
+                $(newForecastCard).append(forecastHumidityPercent);
             }
         });
     })
