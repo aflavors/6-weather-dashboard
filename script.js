@@ -5,6 +5,8 @@ var currentDay = moment().format('LL');
 // URL we need to query the database
 var queryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + location + "&appid=" + APIKey;
 
+console.log(moment().add(1,'days').format('LL'))
+
 var cltQueryURL = "https://api.openweathermap.org/data/2.5/forecast?q=Charlotte,NorthCarolina&appid=" + APIKey;
 
 // Test AJAX Call
@@ -94,7 +96,7 @@ $(document).on("click", ".location-button", function(){
             url: locationQueryOneCall,
             method: "GET"
         }).then(function(response) {
-            console.log(response.current.uvi) // UV Index
+            console.log(response.daily[1].humidity) //Remove
             $(uvIndex).text("UV Index: " + response.current.uvi)
             $("#location-weather-view").append(uvIndex);
             // UV Index Scale Style
@@ -107,6 +109,23 @@ $(document).on("click", ".location-button", function(){
             else if(response.current.uvi > 5){
                 $(uvIndex).addClass("btn btn-danger");
             }
+
+            let forecastDates = [moment().add(1,'days').format('LL'), moment().add(2,'days').format('LL'), moment().add(3,'days').format('LL'), moment().add(4,'days').format('LL'), moment().add(5,'days').format('LL')];
+            console.log(forecastDates);
+
+            let forecastIcons = [response.daily[1].weather[0].icon, response.daily[2].weather[0].icon, response.daily[3].weather[0].icon, response.daily[4].weather[0].icon, response.daily[5].weather[0].icon];
+            console.log(forecastIcons);
+
+            let forecastTemps = [response.daily[1].temp.day, response.daily[2].temp.day, response.daily[3].temp.day, response.daily[4].temp.day, response.daily[5].temp.day];
+            console.log(forecastTemps);
+
+            let forecastHumidityPercents = [response.daily[1].humidity, response.daily[2].humidity, response.daily[3].humidity, response.daily[4].humidity, response.daily[5].humidity];
+            console.log(forecastHumidityPercents);
         });
     })
 })
+
+//Forecast Function
+function renderForecastCard (){
+
+}
