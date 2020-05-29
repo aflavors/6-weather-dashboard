@@ -121,6 +121,19 @@ $(document).on("click", ".location-button", function(){
 
             let forecastHumidityPercents = [response.daily[1].humidity, response.daily[2].humidity, response.daily[3].humidity, response.daily[4].humidity, response.daily[5].humidity];
             console.log(forecastHumidityPercents);
+
+            for(var i=0; i < 5; i++){
+                console.log(forecastDates[i] + forecastTemps[i])
+                var newForecastCard = $("<div>");
+                newForecastCard.addClass("card card-body col-lg-2");
+                newForecastCard.attr("style", "width:12rem;");
+                $("#location-forecast-view").append(newForecastCard);
+                
+                var forecastIcon = $("<img>");
+                forecastIcon.addClass("card-img-top");
+                forecastIcon.attr("src", "http://openweathermap.org/img/wn/" + forecastIcons[i] + "@2x.png");
+                $(newForecastCard).append(forecastIcon);
+            }
         });
     })
 })
