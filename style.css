@@ -4,3 +4,6 @@
 .form-control {
     border-radius: 0;
 }
+#five-day-div {
+    display: none;
+}
