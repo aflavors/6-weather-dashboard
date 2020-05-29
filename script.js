@@ -56,6 +56,7 @@ $("#search-location-button").on("click", function(event){
 $(document).on("click", ".location-button", function(){
     $("#location-weather-view").empty();
     $("#location-forecast-view").empty();
+    $("#five-day-div").show();
     
     var locationInputText = $(this).text();
     var locationQueryURL = "https://api.openweathermap.org/data/2.5/weather?q=" + locationInputText + "&appid=" + APIKey;
@@ -127,7 +128,7 @@ $(document).on("click", ".location-button", function(){
             for(let i=0; i < 5; i++){
                 
                 let newForecastCard = $("<div>");
-                newForecastCard.addClass("card card-body col-lg-2");
+                newForecastCard.addClass("card card-body col-lg-3");
                 newForecastCard.attr("style", "width:12rem;");
                 $("#location-forecast-view").append(newForecastCard);
                 
