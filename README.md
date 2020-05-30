@@ -2,6 +2,7 @@
 
 ![Website Screenshot](./assets/Images/README-1.png)
 This application is a weather dashboard that provides the weather outlook for multiple cities.
+
 [GitHub Pages Link](https://aflavors.github.io/6-weather-dashboard/)
 
 ## Table of Contents
