@@ -15,12 +15,9 @@ function renderLocationButtons() {
         for(var i=0; i < locations.length; i++){
             localStorage.setItem("searchedLocation", JSON.stringify(locations));
         }
-        
-        console.log("searchedLocation", locations);
-        
     })
 }
-
+//Display Locations in localStorage
 function renderSearchedLocations() {
     var lastSearchedLocation = localStorage.getItem("searchedLocation");
     var displayButtons = JSON.parse(lastSearchedLocation);
@@ -29,9 +26,9 @@ function renderSearchedLocations() {
         newLocationButton.text(location);
         newLocationButton.addClass("location-button btn btn-block btn-outline-secondary btn-group-vertical");
         $("#search-location-button-list").append(newLocationButton);
-});
+    });
 }
-
+//Run Functions
 renderLocationButtons();
 renderSearchedLocations();
 
@@ -66,7 +63,6 @@ $(document).on("click", ".location-button", function(){
         var uvIndex = $("<p>");
         // Convert temperature to Farenheit
         var tempF = (response.main.temp - 273.15) * 1.80 + 32;
-        //Add 5 day forecast
         $(locationName).text(response.name);
         $("#location-weather-view").append(locationName);
         $(iconImg).attr("src","http://openweathermap.org/img/wn/" + response.weather[0].icon + "@2x.png");
@@ -90,7 +86,6 @@ $(document).on("click", ".location-button", function(){
             url: locationQueryOneCall,
             method: "GET"
         }).then(function(response) {
-            console.log(response.daily[1].humidity) //Remove
             $(uvIndex).text("UV Index: " + response.current.uvi)
             $("#location-weather-view").append(uvIndex);
             // UV Index Scale Style
