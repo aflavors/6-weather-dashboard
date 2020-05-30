@@ -7,3 +7,14 @@
 #five-day-div {
     display: none;
 }
+.jumbotron {
+    background-color: #d1e2e3;
+    color: #505050;
+}
+.instructions {
+    text-align: center;
+}
+p.instructions{
+    margin-top: 20px;
+    line-height: 40px;
+}
