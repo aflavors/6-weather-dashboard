@@ -1,5 +1,5 @@
 // Initial array of locations
-var locations = ["Charlotte,NorthCarolina", "Bujumbura,Burundi"];
+var locations = [];
 var APIKey = "5ac6ffcaa85c9e2fcacb6fac2c601688";
 var currentDay = moment().format('LL');
 
@@ -11,15 +11,36 @@ function renderLocationButtons() {
         newLocationButton.text(location);
         newLocationButton.addClass("location-button btn btn-block btn-outline-secondary btn-group-vertical");
         $("#search-location-button-list").append(newLocationButton);
+
+        for(var i=0; i < locations.length; i++){
+            localStorage.setItem("searchedLocation", JSON.stringify(locations));
+        }
+        
+        console.log("searchedLocation", locations);
+        
     })
 }
+
+function renderSearchedLocations() {
+    var lastSearchedLocation = localStorage.getItem("searchedLocation");
+    var displayButtons = JSON.parse(lastSearchedLocation);
+    displayButtons.forEach(function(location){
+        var newLocationButton = $("<button>");
+        newLocationButton.text(location);
+        newLocationButton.addClass("location-button btn btn-block btn-outline-secondary btn-group-vertical");
+        $("#search-location-button-list").append(newLocationButton);
+});
+}
+
 renderLocationButtons();
+renderSearchedLocations();
 
 //Add Location to Array and Render on List
 $("#search-location-button").on("click", function(event){
     event.preventDefault();
     var locationInput = $("#search-location-input").val().trim();
     locations.push(locationInput);
+    
 // Render Updated List of Locations
     renderLocationButtons();
 })
