@@ -1,23 +1,23 @@
-.btn {
+.btn { /*Remove rounded corners*/
     border-radius: 0;
 }
-.form-control {
+.form-control { /*Remove rounded corners*/
     border-radius: 0;
 }
-#five-day-div {
+#five-day-div { /*Hide 5-day forecast until click*/
     display: none;
 }
-.jumbotron {
+.jumbotron { /*Background color and text*/
     background-color: #d1e2e3;
     color: #505050;
 }
-.instructions {
+.instructions { /*Align center*/
     text-align: center;
 }
-p.instructions{
+p.instructions{ /*Instructions*/
     margin-top: 20px;
     line-height: 40px;
 }
-#location-weather-view{
+#location-weather-view{ /*Current weather display*/
     text-align: center;
 }
