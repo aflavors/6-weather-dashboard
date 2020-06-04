@@ -16,12 +16,16 @@ function renderLocationButtons() {
             localStorage.setItem("searchedLocation", JSON.stringify(locations));
         }
     })
-    renderSearchedLocations();
+    
 }
 //Display Locations in localStorage
 function renderSearchedLocations() {
     var lastSearchedLocation = localStorage.getItem("searchedLocation");
-    var displayButtons = JSON.parse(lastSearchedLocation);
+    if (lastSearchedLocation) {
+        var displayButtons = JSON.parse(lastSearchedLocation);
+    } else {
+        var displayButtons = []
+    }
     displayButtons.forEach(function(location){
         var newLocationButton = $("<button>");
         newLocationButton.text(location);
@@ -31,7 +35,7 @@ function renderSearchedLocations() {
 }
 //Run Functions
 renderLocationButtons();
-
+renderSearchedLocations();
 
 //Add Location to Array and Render on List
 $("#search-location-button").on("click", function(event){
