@@ -1,9 +1,6 @@
 # Weather Dashboard
 
-![Website Screenshot](./assets/Images/README-1.png)
-This application is a weather dashboard that provides the weather outlook for multiple cities.
-
-[GitHub Pages Link](https://aflavors.github.io/6-weather-dashboard/)
+[Weather Dashboard](https://www.akeemflavors.com/weather-dashboard/) is an application that provides the weather outlook for multiple cities.
 
 ## Table of Contents
 - [Overview](#Overview)
